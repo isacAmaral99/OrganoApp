@@ -7,46 +7,54 @@ import Time from "./Componentes/Time";
 function App() {
   const [colaboradores, setColaboradores] = useState([]);
 
+  function deletarColaborador(){
+    console.log("deletando o colaborador")
+  }
+
+
   const aoNovoColaboradorAdicionado = (colaborador) => {
     setColaboradores([...colaboradores,colaborador])
   };
-  const times = [
+  const [times,setTimes] = useState([
     {
-      nome:'Programação',
-      corPrimaria:'#57c278',
-      corSecundaria:'#D9F7E9'
-    },
-    {
-      nome:'Front-End',
-      corPrimaria:'#82CFFA',
-      corSecundaria:'#E8F8FF'
-    },
-    {
-      nome:'Data Science',
-      corPrimaria:'#A6D157',
-      corSecundaria:'#F0F8E2'
-    },
-    {
-      nome:'Devops',
-      corPrimaria:'#E06B69',
-      corSecundaria:'#FDE7E8'
-    },
-    {
-      nome:'Ux e Desing',
-      corPrimaria:'#DB6E8F',
-      corSecundaria:'#FAE9F5'
-    },
-    {
-      nome:'Mobile',
-      corPrimaria:'#FFBA05',
-      corSecundaria:'#FFF5D9'
-    },
-    {
-      nome:'Inovação e Gestão',
-      corPrimaria:'#FF8A29',
-      corSecundaria:'#FFEEDF'
-    },
-  ]
+            nome: 'Programação',
+            cor: '#57C278'
+        },
+        {
+            nome: 'Front-End',
+            cor: '#82CFFA'
+        },
+        {
+            nome: 'Data Science',
+            cor: '#A6D157'
+        },
+        {
+            nome: 'Devops',
+            cor: '#E06B69'
+        },
+        {
+            nome: 'UX e Design',
+            cor: '#DB6EBF'
+        },
+        {
+            nome: 'Mobile',
+            cor: '#FFBA05'
+        },
+        {
+            nome: 'Inovação e Gestão',
+            cor: '#FF8A29'
+        },
+  ]);
+
+  function mudarCorDoTime(cor,nome){
+    setTimes(times.map(time =>{
+      if(time.nome === nome){
+        time.cor = cor
+      }
+      return time
+    }))
+
+  }
   
   return (
     <div className="App">
@@ -57,14 +65,16 @@ function App() {
           aoNovoColaboradorAdicionado(colaborador)
         }
       />
-      {times.map(time => 
+      {times.map((time,indice) => 
         <Time 
-          key={time.nome} 
+          key={indice} 
           nome={time.nome} 
-          corPrimaria={time.corPrimaria}  
-          corSecundaria={time.corSecundaria}
+         
+          cor={time.cor}
           colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
-        />   
+          aoDeletar={deletarColaborador}
+          mudarCorDoTime = {mudarCorDoTime}
+        />
       )}
       <Rodape/>
       {/* <Time nome="Programação"/>
