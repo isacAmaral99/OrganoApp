@@ -25,7 +25,9 @@ const Time = (props) =>{
                             cargo={colaborador.cargo} 
                             imagem={colaborador.imagem} 
                             cor={props.cor}
+                            favorito={colaborador.favorito}
                             aoDeletar ={props.aoDeletar}
+                            aoFavoritar ={props.aoFavoritar}
                             /> 
                             
                         }
